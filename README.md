@@ -55,11 +55,19 @@ home_region_b = "us-ashburn-1"
 
 ````
 
-Deploy:
+## Deploy
 
     terraform init
     terraform plan
     terraform apply
+
+## Verify
+
+Verify bi-directional private connectivity between the virtual machines in the Company A and Company B tenancies.
+1. Connect using SSH to a VM attached to VCN A in the Company A tenancy.
+2. View the network configuration of the VM, and try pinging a VM that's attached to VCN C of Company B. In the following example, the private IP address of the VM in the Company A tenancy is 10.0.0.2. The ping request from this VM to the private address of another VM (192.168.0.2) in the Company B tenancy is successful.
+3. Connect using SSH to a VM attached to VCN C in the Company B tenancy.
+4. View the network configuration of the VM, and try pinging a VM that's attached to VCN A of Company A. In the following example, the private IP address of the VM in the Company B tenancy is 192.168.0.2. The ping request from this VM to the private address of another VM (10.0.0.2) in the Company A tenancy is successful.
 
 ## Destroy the Deployment
 When you no longer need the deployment, you can run this command to destroy it:
