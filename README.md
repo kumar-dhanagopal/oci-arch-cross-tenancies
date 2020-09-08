@@ -1,8 +1,12 @@
-# oci-arch-cross-tenancies
+# Configure Cross-Region Private Connectivity Between Tenancies
 
 You might have business and technical reasons to privately peer your virtual networks in the cloud and ensure that your network traffic never traverses the public internet. For example, you might want private connectivity within a region and within your organization, or with a cooperating organization.
 
 This repository shows how to configure cross-region private connectivity by using a transit LPG between two OCI tenancies.
+
+## Architecture
+
+![](./images/cross-region.png)
 
 ## Terraform Provider for Oracle Cloud Infrastructure
 The OCI Terraform Provider is now available for automatic download through the Terraform Provider Registry. 
@@ -15,7 +19,7 @@ and [setup guide](https://www.terraform.io/docs/providers/oci/guides/version-3-u
 * [Troubleshooting](https://www.terraform.io/docs/providers/oci/guides/guides/troubleshooting.html)
 
 ## Clone the Module
-Now, you'll want a local copy of this repo. You can make that with the commands:
+You'll need a local copy of this repo. You can clone the repo using the following commands:
 
     git clone https://github.com/oracle-quickstart/oci-arch-cross-tenancies.git
     cd oci-arch-cross-tenancies
@@ -65,20 +69,20 @@ home_region_b = "us-ashburn-1"
 
 Verify bi-directional private connectivity between the virtual machines in the Company A and Company B tenancies.
 1. Connect using SSH to a VM attached to VCN A in the Company A tenancy.
-2. View the network configuration of the VM, and try pinging a VM that's attached to VCN C of Company B. In the following example, the private IP address of the VM in the Company A tenancy is 10.0.0.2. The ping request from this VM to the private address of another VM (192.168.0.2) in the Company B tenancy is successful.
+2. View the network configuration of the VM, and try pinging a VM that's attached to VCN C of Company B.
+In the following example, the private IP address of the VM in the Company A tenancy is 10.0.0.2. The ping request from this VM to the private address of another VM (192.168.0.2) in the Company B tenancy is successful.
+![](./images/xregion-private-connectivity-test-AtoC.png)
 3. Connect using SSH to a VM attached to VCN C in the Company B tenancy.
-4. View the network configuration of the VM, and try pinging a VM that's attached to VCN A of Company A. In the following example, the private IP address of the VM in the Company B tenancy is 192.168.0.2. The ping request from this VM to the private address of another VM (10.0.0.2) in the Company A tenancy is successful.
+4. View the network configuration of the VM, and try pinging a VM that's attached to VCN A of Company A. 
+In the following example, the private IP address of the VM in the Company B tenancy is 192.168.0.2. The ping request from this VM to the private address of another VM (10.0.0.2) in the Company A tenancy is successful.
+![](./images/xregion-private-connectivity-test-CtoA.png)
 
 ## Destroy the Deployment
 When you no longer need the deployment, you can run this command to destroy it:
 
     terraform destroy
 
-## Web Application Architecture
 
-![](./images/cross-region.png)
-
-
-## Reference Archirecture
+## Reference Architecture
 
 - [Configure cross-region private connectivity between tenancies](https://docs.oracle.com/en/solutions/xregion-pvt-connectivity-oci/index.html)
